@@ -1,5 +1,5 @@
 {
-    "name": "laravel-exception-reporter",
+    "name": "abdulqadir/laravel-exception-reporter",
     "description": "Report Exceptions from your laravel application",
     "license": "MIT",
     "keywords": ["email", "exception", "laravel", "laravel-5-package", "exception-handling", "debugging"],
