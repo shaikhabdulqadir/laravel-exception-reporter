@@ -32,16 +32,11 @@ class Handler extends ExceptionHandler
      */
     public function report(Throwable $exception)
     {
-        if ($exception instanceof \LaravelExceptionReporter\Exceptions\ExceptionReporter) {
-            dd("instanceof");
-            if ($exception->getMessage()) {
-            }
-        }
         // check if we should mail this exception
-        if ($this->shouldMail($exception)) {
+        // if ($this->shouldMail($exception)) {
             // if we passed our validation lets mail the exception
             $this->reportException($exception);
-        }
+        // }
 
         // run the parent report (logs exception and all that good stuff)
         $this->callParentReport($exception);
@@ -56,26 +51,6 @@ class Handler extends ExceptionHandler
     protected function callParentReport(Throwable $exception)
     {
         parent::report($exception);
-    }
-
-    /**
-     * Determine if the exception should be mailed
-     *
-     * @param Throwable $exception
-     * @return bool
-     * @throws Exception
-     */
-    protected function shouldMail(Throwable $exception)
-    {
-        return true;
-        // if emailing is turned off in the config
-        if (config('laravelExceptionReporter.report_exception') != true ) {
-            // we should not report this exception
-            return false;
-        }
-
-        // we made it past all the possible reasons to not email so we should mail this exception
-        return true;
     }
 
     /**
@@ -128,6 +103,20 @@ class Handler extends ExceptionHandler
         //         ->to(config('laravelExceptionReporter.ErrorEmail.toEmailAddress'))
         //         ->subject($subject);
         // });
+    }
+
+
+    protected function shouldMail(Throwable $exception)
+    {
+        return true;
+        // if emailing is turned off in the config
+        if (config('laravelExceptionReporter.report_exception') != true ) {
+            // we should not report this exception
+            return false;
+        }
+
+        // we made it past all the possible reasons to not email so we should mail this exception
+        return true;
     }
 
 }
